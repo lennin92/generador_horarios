@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for horarios project.
 
@@ -37,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djutils',
     'conf'
 ]
 

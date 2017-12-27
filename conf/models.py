@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -69,11 +70,30 @@ class HorarioSeccion(models.Model):
                            self.dia.nombre,
                            self.hora.nombre)
 
+
+class GeneracionHorarios(models.Model):
+    fechaHoraInicio = models.DateTimeField()
+    fechaHoraFin = models.DateTimeField()
+    TotalDHorasFaltantes = models.IntegerField()
+    TotalSHorasFaltantes = models.IntegerField()
+    TotalReqPorCumplir   = models.IntegerField()
+
+
 class Asignacion(models.Model):
+    generacion = models.ForeignKey('GeneracionHorarios')
     materia = models.ForeignKey('Materia')
     gradoSeccion = models.ForeignKey('GradoSeccion')
     docente = models.ForeignKey('Docente')
     dia = models.ForeignKey('Dia')
     hora = models.ForeignKey('Hora')
-    horarioDocente = models.OneToOneField('HorarioDocente')
-    horarioSeccion= models.OneToOneField('HorarioSeccion')
+    horarioDocente = models.ForeignKey('HorarioDocente')
+    horarioSeccion= models.ForeignKey('HorarioSeccion')
+
+
+class RequerimientoGradoMateria(models.Model):
+    materia = models.ForeignKey('Materia')
+    gradoSeccion = models.ForeignKey('GradoSeccion')
+    docente = models.ForeignKey('Docente')
+    cantidadHoras = models.IntegerField()
+
+

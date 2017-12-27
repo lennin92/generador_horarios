@@ -1,7 +1,45 @@
-<table>
+<h4>{{ seccion }}</h4>
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+
+<table class="gridtable">
     <tr>
+        <th>Hora</th>
         {% for d in dias_id %}
-            <th> {{ diasd|get_value_from_dict:d }}</th>
+            <th> {{ diasd|get_item:d }}</th>
         {% endfor %}
     </tr>
+    {% for h in horas_id %}
+        <tr>
+            <td>{{ horasd|get_item:h }}</td>
+            {% for d in dias_id %}
+                {% with d|dict_tuplegen:h as t %}
+                <td> {{ horarios_asignacion|get_item:t }}</td>
+                {% endwith %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
 </table>
