@@ -59,6 +59,9 @@ class HorarioDocente(models.Model):
                            self.dia.nombre,
                            self.hora.nombre)
 
+    class Meta:
+        unique_together = ("docente", "dia", "hora")
+
 
 class HorarioSeccion(models.Model):
     seccion = models.ForeignKey('GradoSeccion')
@@ -69,6 +72,9 @@ class HorarioSeccion(models.Model):
         return "%s %s %s"%(self.seccion.nombre,
                            self.dia.nombre,
                            self.hora.nombre)
+
+    class Meta:
+        unique_together = ("seccion", "dia", "hora")
 
 
 class GeneracionHorarios(models.Model):
@@ -95,5 +101,14 @@ class RequerimientoGradoMateria(models.Model):
     gradoSeccion = models.ForeignKey('GradoSeccion')
     docente = models.ForeignKey('Docente')
     cantidadHoras = models.IntegerField()
+
+    def __str__(self):
+        return "%s %s %s %d"%(self.gradoSeccion.nombre,
+                           self.materia.nombre,
+                           self.docente.nombre,
+                           self.cantidadHoras)
+
+    class Meta:
+        unique_together = ("materia", "gradoSeccion")
 
 

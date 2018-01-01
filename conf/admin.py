@@ -20,3 +20,9 @@ class HorarioSeccionAdmin(admin.ModelAdmin):
     list_display = ('seccion', 'dia', 'hora')
 
 admin.site.register(HorarioSeccion, HorarioSeccionAdmin)
+
+
+class RequerimientoGradoMateriaAdmin(admin.ModelAdmin):
+    list_display = ('materia', 'docente', 'gradoSeccion', 'cantidadHoras')
+
+admin.site.register(RequerimientoGradoMateria, RequerimientoGradoMateriaAdmin)
