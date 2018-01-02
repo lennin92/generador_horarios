@@ -37,7 +37,17 @@ table.gridtable td {
             <td>{{ horasd|get_item:h }}</td>
             {% for d in dias_id %}
                 {% with d|dict_tuplegen:h as t %}
-                <td> {{ horarios_asignacion|get_item:t }}</td>
+                    {% if asignado %}
+                        {% with horarios_asignacion|get_item:t as asi %}
+                            {% if asi is not None %}
+                                <td>{{ asi.materia }} | {{ asi.docente }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        {% endwith %}
+                        {% else %}
+                            <td>{{ horarios_asignacion|get_item:t }}</td>
+                    {% endif %}
                 {% endwith %}
             {% endfor %}
         </tr>

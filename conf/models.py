@@ -83,6 +83,7 @@ class GeneracionHorarios(models.Model):
     TotalDHorasFaltantes = models.IntegerField()
     TotalSHorasFaltantes = models.IntegerField()
     TotalReqPorCumplir   = models.IntegerField()
+    observaciones = models.TextField()
 
 
 class Asignacion(models.Model):
